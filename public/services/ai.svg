@@ -1,0 +1,45 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1628"/>
+      <stop offset="100%" stop-color="#12315e"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3070d0"/>
+      <stop offset="100%" stop-color="#20f0f0"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#3070d0" stroke-opacity="0.15"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <rect width="800" height="600" fill="url(#grid)"/>
+  <circle cx="680" cy="120" r="200" fill="#3070d0" opacity="0.12"/>
+  <circle cx="120" cy="500" r="180" fill="#20f0f0" opacity="0.08"/>
+  <!-- Neural network -->
+  <g stroke="#3070d0" stroke-opacity="0.6" stroke-width="2">
+    <line x1="250" y1="200" x2="400" y2="180"/>
+    <line x1="250" y1="200" x2="400" y2="300"/>
+    <line x1="250" y1="200" x2="400" y2="420"/>
+    <line x1="250" y1="310" x2="400" y2="180"/>
+    <line x1="250" y1="310" x2="400" y2="300"/>
+    <line x1="250" y1="310" x2="400" y2="420"/>
+    <line x1="250" y1="420" x2="400" y2="180"/>
+    <line x1="250" y1="420" x2="400" y2="300"/>
+    <line x1="250" y1="420" x2="400" y2="420"/>
+    <line x1="400" y1="180" x2="550" y2="300"/>
+    <line x1="400" y1="300" x2="550" y2="300"/>
+    <line x1="400" y1="420" x2="550" y2="300"/>
+  </g>
+  <g fill="#0d1f3c" stroke="#20f0f0" stroke-width="3">
+    <circle cx="250" cy="200" r="22"/>
+    <circle cx="250" cy="310" r="22"/>
+    <circle cx="250" cy="420" r="22"/>
+    <circle cx="400" cy="180" r="26"/>
+    <circle cx="400" cy="300" r="26"/>
+    <circle cx="400" cy="420" r="26"/>
+  </g>
+  <circle cx="550" cy="300" r="34" fill="#16305a" stroke="url(#accent)" stroke-width="3"/>
+  <text x="543" y="307" font-family="monospace" font-size="16" fill="#20f0f0">AI</text>
+  <rect x="230" y="500" width="340" height="6" rx="3" fill="url(#accent)" opacity="0.6"/>
+</svg>
