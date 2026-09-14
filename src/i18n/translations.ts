@@ -206,6 +206,7 @@ const en: Translations = {
       step1: "Please tell us about your project (service, budget, timeline)",
       step2: "Please fill in your name, email and project details",
       invalidEmail: "Please enter a valid email address",
+      sendFailed: "We could not send your request. Please try again.",
     },
   },
   footer: {
@@ -296,7 +297,9 @@ const en: Translations = {
     send: "Send Message",
     sending: "Sending...",
     successTitle: "Message sent",
-    successDescription: "Your email client will open with the details ready to send.",
+    successDescription: "Your request has been sent. We will get back to you within 24 hours.",
+    errorTitle: "Message not sent",
+    errorDescription: "We could not send your request. Please try again or email us directly.",
     preferEmail: "Prefer email? Reach us at",
   },
   serviceDetail: {
@@ -569,6 +572,7 @@ const ar: Translations = {
       step1: "يُرجى إخبارنا بمشروعك (الخدمة، الميزانية، الجدول الزمني)",
       step2: "يُرجى ملء الاسم والبريد الإلكتروني وتفاصيل المشروع",
       invalidEmail: "يُرجى إدخال عنوان بريد إلكتروني صالح",
+      sendFailed: "تعذر إرسال طلبك. يُرجى المحاولة مرة أخرى.",
     },
   },
   footer: {
@@ -932,6 +936,7 @@ const de: Translations = {
       step1: "Bitte teilen Sie uns etwas über Ihr Projekt mit (Leistung, Budget, Zeitplan)",
       step2: "Bitte füllen Sie Name, E-Mail und Projektdetails aus",
       invalidEmail: "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+      sendFailed: "Ihre Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es erneut.",
     },
   },
   footer: {

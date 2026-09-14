@@ -12,6 +12,7 @@ import { toast } from "sonner";
 import { Briefcase, Clock, ArrowRight, ArrowLeft, CheckCircle, User, Mail, MessageSquare, FileText } from "lucide-react";
 import { useServices } from "@/hooks/useServices";
 import { useLanguage } from "@/hooks/useLanguage";
+import { sendInquiryEmail } from "@/lib/sendInquiry";
 
 const slideVariants = {
   enter: (direction: number) => ({
@@ -27,8 +28,6 @@ const slideVariants = {
     opacity: 0
   })
 };
-
-const CONTACT_EMAIL = "goldst422@gmail.com";
 
 const Inquiry = () => {
   const { t } = useLanguage();
@@ -50,6 +49,7 @@ const Inquiry = () => {
   const [email, setEmail] = useState("");
   const [company, setCompany] = useState("");
   const [details, setDetails] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleStep1Continue = () => {
     if (!service || !budget || !timeline) {
@@ -65,18 +65,7 @@ const Inquiry = () => {
     setStep(1);
   };
 
-  const buildMailtoLink = () => {
-    const serviceName = getServiceLabel(service);
-    const budgetLabel = t(`inquiry.budgets.${budget}`) || budget;
-    const timelineLabel = t(`inquiry.timelines.${timeline}`) || timeline;
-    const subject = encodeURIComponent(`CYRIX Project Inquiry - ${serviceName}`);
-    const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}${company ? `\nCompany: ${company}` : ""}\n\nService: ${serviceName}\nBudget: ${budgetLabel}\nTimeline: ${timelineLabel}\n\nProject Details:\n${details}`
-    );
-    return `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-  };
-
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!name || !email || !details) {
       toast.error(t("inquiry.errors.step2"));
       return;
@@ -88,12 +77,22 @@ const Inquiry = () => {
       return;
     }
 
-    setDirection(1);
-    setStep(3);
-  };
-
-  const handleSendEmail = () => {
-    window.location.href = buildMailtoLink();
+    setIsSubmitting(true);
+    try {
+      const serviceName = getServiceLabel(service);
+      await sendInquiryEmail({
+        name,
+        email,
+        subject: `Project Inquiry - ${serviceName}`,
+        message: `Company: ${company || "Not provided"}\nService: ${serviceName}\nBudget: ${t(`inquiry.budgets.${budget}`) || budget}\nTimeline: ${t(`inquiry.timelines.${timeline}`) || timeline}\n\nProject Details:\n${details}`,
+      });
+      setDirection(1);
+      setStep(3);
+    } catch {
+      toast.error(t("inquiry.errors.sendFailed"));
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleReset = () => {
@@ -380,14 +379,6 @@ const Inquiry = () => {
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                      <Button
-                        size="default"
-                        className="rounded-md bg-primary hover:bg-primary/90 text-primary-foreground smooth-hover text-[11px] uppercase tracking-wider font-normal"
-                        onClick={handleSendEmail}
-                      >
-                        <Mail className="mr-2 h-4 w-4" />
-                        {t("inquiry.step3.openEmailClient")}
-                      </Button>
                       <Button
                         variant="outline"
                         size="default"

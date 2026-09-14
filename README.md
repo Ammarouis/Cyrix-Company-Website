@@ -64,6 +64,20 @@ This project is built with:
 
 Simply open [Lovable](https://lovable.dev/projects/1e49eeda-b375-49ea-be21-892412c77e87) and click on Share -> Publish.
 
+## Customer request emails
+
+The contact form and project inquiry form send requests through the Supabase Edge Function `send-inquiry` to `goldst422@gmail.com`.
+
+Before deploying the function, configure these Supabase secrets:
+
+```sh
+supabase secrets set RESEND_API_KEY=re_your_api_key
+supabase secrets set RESEND_FROM_EMAIL="CYRIX Website <noreply@your-verified-domain.com>"
+supabase functions deploy send-inquiry
+```
+
+Create the `RESEND_API_KEY` in Resend and verify the sender domain used by `RESEND_FROM_EMAIL`. If no sender is configured, the function uses Resend's onboarding sender, which is suitable only for initial testing.
+
 ## Can I connect a custom domain to my Lovable project?
 
 Yes, you can!

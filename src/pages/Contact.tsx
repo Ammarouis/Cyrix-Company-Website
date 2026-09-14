@@ -10,6 +10,7 @@ import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { User, Mail, MessageSquare, FileText } from "lucide-react";
 import { useLanguage } from "@/hooks/useLanguage";
+import { sendInquiryEmail } from "@/lib/sendInquiry";
 
 const CONTACT_EMAIL = "goldst422@gmail.com";
 
@@ -35,19 +36,15 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const subject = encodeURIComponent(formData.subject);
-    const body = encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-    );
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-
-    toast({
-      title: t("contact.successTitle"),
-      description: t("contact.successDescription"),
-    });
-
-    setFormData({ name: "", email: "", subject: "", message: "" });
-    setIsSubmitting(false);
+    try {
+      await sendInquiryEmail(formData);
+      toast({ title: t("contact.successTitle"), description: t("contact.successDescription") });
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    } catch {
+      toast({ title: t("contact.errorTitle"), description: t("contact.errorDescription"), variant: "destructive" });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
